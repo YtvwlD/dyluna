@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div class="modal fade" id="first_login" tabindex="-1" role="dialog" aria-labelledby="first_login-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="first_login-label">First Login</h4>
+      </div>
+      <form onSubmit="first_login(); return false;">
+	<div class="modal-body" style="padding-bottom: 10px;">
+		<div id="first_login-noInput" class="alert alert-danger">
+			<strong>No input!</strong>
+			Something has to be there.
+		</div>
+		<div id="first_login-error" class="alert alert-warning">
+			<strong>Error!</strong>
+			Sadly this did not succeed.
+			You can try it again if you want to.
+		</div>
+		<div id="first_login-success" class="alert alert-success">
+			<strong>Success!</strong>
+			Your data has been saved.
+		</div>
+		<p>
+			This is your first login.<br /><br />
+			We have got some data from your OpenID provider.<br />
+			Please check whether they are correct, and please change them if they are wrong.
+		</p>
+		<div class="form-group row">
+			<label id="username-label" class="control-label col-sm-3" style="display: block;">Username: </label>
+			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="username">username</em>
+			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
+				<label class="btn btn-primary active">
+					<input id="username-right" type="radio" name="username" checked /> Right.
+				</label>
+				<label class="btn btn-primary">
+					<input id="username-wrong" type="radio" name="username"/> Wrong.
+				</label>
+			</div>
+			<div id="username-correct" class="col-sm-4" style="display: none;">
+				<input type="text" class="form-control" id="username-correct-text" placeholder="Username"/>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label id="email-label" class="control-label col-sm-3" style="display: block;">Email: </label>
+			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="email">email</em>
+			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
+				<label class="btn btn-primary active">
+					<input id="email-right" type="radio" name="email" checked /> Right.
+				</label>
+				<label class="btn btn-primary">
+					<input id="email-wrong" type="radio" name="email"/> Wrong.
+				</label>
+			</div>
+			<div id="email-correct" class="col-sm-4" style="display: none;">
+				<input type="text" class="form-control" id="email-correct-text" placeholder="email"/>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Not now</button>
+		<button id="first_login-save" type="button" class="btn btn-primary" onclick="first_login();" data-loading-text="Loading...">Next &raquo;</button>
+	</div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

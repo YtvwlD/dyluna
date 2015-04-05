@@ -1,0 +1,67 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">REPLACE_GAME_NAME</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li id=landing class="active landing"><a href="#">Landing</a></li>
+				<li id=home class=loggedin ><a href="#" onclick="loadpage('home');">Home</a></li>
+				<!--<li><a href="#contact">Contact</a></li>-->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<!--<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>-->
+							<li class="divider"></li>
+							<!--<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>-->
+							<li><a href="#" onclick='jQuery("#REPLACE_GAME_NAME-info").modal("show");'>About...</a></li>
+						</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class=landing ><a href="#" onclick='oid_modal();'>Login or register</a></li>
+				<li class=loggedin ><a href="#" onclick="logout();">Logout</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="REPLACE_GAME_NAME-info" tabindex="-1" role="dialog" aria-labelledby="myShow-info-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="REPLACE_GAME_NAME-info-label">About REPLACE_GAME_NAME</h4>
+			</div>
+			<div class="modal-body" style="padding-bottom: 10px;">
+				<p>REPLACE_GAME_NAME is - or will be - a b rowser game - <a target="_blank" href="http://occupyflash.org/">completely without Flash!</a></p>
+				<p>
+					Instead, <a target="_blank" href="https://de.wikipedia.org/wiki/AJAX">AJAX</a>, <a target="_blank" href="https://de.wikipedia.org/wiki/JavaScript">JavaScript</a> and <a target="_blank" href="http://python.org">Python</a> are used.<br />
+					The login is done via <a target="_blank" href="https://de.wikipedia.org/wiki/OpenID">OpenID</a>, a dezentral and open authentifcation model.<br />
+					<br />
+				</p>
+				<p>
+					<p>The graphical display is done by <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>.<br /> <small>(This is "Copyright 2013 Twitter, Inc under the <a target="_blank" href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT license</a>.")</small></p>
+					<p><a href="http://fontawesome.io/">Font Awesome</a> is used, too.</p>
+				</p>
+				<p>The processing on the client is done by <a target="_blank" href="http://jquery.com/">jQuery</a>.<br /> <small>(This is "Copyright 2013 jQuery Foundation and other contributors" under the <a target="_blank" href="https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt">MIT license</a>.)</small></p>
+				<p>The scripts on the server are powered by <a target="_blank" href="http://werkzeug.pocoo.org/">Werkzeug</a>.</p>
+                <p>The error are handled - on the server and on the client - by <a href="https://getsentry.com/">Sentry</a>, Raven and Raven.js.
+                <small>Raven.js is licensed under this <a href="https://github.com/getsentry/raven-js/blob/master/LICENSE" target="_blank">license</a>.</small></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

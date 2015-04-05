@@ -1,0 +1,9 @@
+.oid_inProgress {
+	display: none;
+}
+.oid_error {
+	display: none;
+}
+#oid_success {
+	display: none;
+}

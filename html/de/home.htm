@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div class="modal fade" id="first_login" tabindex="-1" role="dialog" aria-labelledby="first_login-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="first_login-label">Erste Anmeldung</h4>
+      </div>
+      <form onSubmit="first_login(); return false;">
+	<div class="modal-body" style="padding-bottom: 10px;">
+		<div id="first_login-noInput" class="alert alert-danger">
+			<strong>Keine Eingabe!</strong>
+			Da muss schon was stehen.
+		</div>
+		<div id="first_login-error" class="alert alert-warning">
+			<strong>Fehler!</strong>
+			Dies hat leider nicht geklappt.
+			Du kannst es aber gerne erneut versuchen.
+		</div>
+		<div id="first_login-success" class="alert alert-success">
+			<strong>Geschafft!</strong>
+			Deine Daten wurden gespeichert.
+		</div>
+		<p>
+			Dies ist deine erste Anmeldung.<br /><br />
+			Wir haben von deinem OpenID-Provider einige Daten erhalten.<br />
+			Bitte &uuml;berpr&uuml;fe, ob diese stimmen, und korrigiere sie gegebenenfalls.
+		</p>
+		<div class="form-group row">
+			<label id="username-label" class="control-label col-sm-3" style="display: block;">Benutzername: </label>
+			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="username">username</em>
+			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
+				<label class="btn btn-primary active">
+					<input id="username-right" type="radio" name="username" checked /> Stimmt.
+				</label>
+				<label class="btn btn-primary">
+					<input id="username-wrong" type="radio" name="username"/> Stimmt nicht.
+				</label>
+			</div>
+			<div id="username-correct" class="col-sm-4" style="display: none;">
+				<input type="text" class="form-control" id="username-correct-text" placeholder="Benutzername"/>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label id="email-label" class="control-label col-sm-3" style="display: block;">E-Mail: </label>
+			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="email">email</em>
+			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
+				<label class="btn btn-primary active">
+					<input id="email-right" type="radio" name="email" checked /> Stimmt.
+				</label>
+				<label class="btn btn-primary">
+					<input id="email-wrong" type="radio" name="email"/> Stimmt nicht.
+				</label>
+			</div>
+			<div id="email-correct" class="col-sm-4" style="display: none;">
+				<input type="text" class="form-control" id="email-correct-text" placeholder="E-Mail"/>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Nicht jetzt</button>
+		<button id="first_login-save" type="button" class="btn btn-primary" onclick="first_login();" data-loading-text="Laden...">Weiter &raquo;</button>
+	</div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
