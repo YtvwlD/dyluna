@@ -13,4 +13,15 @@ def create(cur):
 		sid += random.choice(randstr)
 	#end taken
 	cur.execute ("INSERT INTO sessions (sid, uid, oid) VALUES (%s, NULL, '')", (sid,))
-	return sid
+	return (sid, 201)
+
+def destroy():
+	if len(do) != 3:
+		return ("Exactly three parameters are needed.", 400)
+	sid = do[2]
+	cur.execute("SELECT * FROM sessions WHERE sid=%s", (sid,))
+	result = cur.fetchall()
+	if len(result) == 0:
+			return ("This sid was not found in the database.", 412)
+	cur.execute ("DELETE FROM sessions WHERE sid=%s", (sid,))
+	return ("", 200)

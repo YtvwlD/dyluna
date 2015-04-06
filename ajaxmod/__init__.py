@@ -11,21 +11,11 @@ def run(request, jsonenc, jsondec, cur):
 	response = Response("Wrong parameters.", 400)
 	if do[0] == "session":
 		if do[1] == "create":
-			sid = session.create(cur)
-			response = Response(sid, 201)
+			res = session.create(cur)
+			response = Response(*res)
 		if do[1] == "destroy":
-			if len(do) != 3:
-				response = Response("Exactly three parameters are needed.", 400)
-			else:
-				sid = do[2]
-				cur.execute("SELECT * FROM sessions WHERE sid=%s", (sid,))
-				result = cur.fetchall()
-				if len(result) == 0:
-					response = Response("This sid was not found in the database.", 412)
-				else:
-					cur.execute ("DELETE FROM sessions WHERE sid=%s", (sid,))
-					response = Response("", 200)
-
+			res = session.destroy(do, cur)
+			response = Response(*res)
 	if do[0] == "openid":
 		if do[1] == "do":
 			if len(do) != 4:
