@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from wsgiref.handlers import CGIHandler
-from werkzeug.wrappers import Response
+from werkzeug.wrappers import Request, Response
 
 from get_html import get_html, choose_lang
 
