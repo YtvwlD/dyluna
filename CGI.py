@@ -7,10 +7,10 @@ from get_html import get_html, choose_lang
 app = None
 
 try:
-    from sentry import Client
-    client = Client()
+	from sentry import Client
+	client = Client()
 except:
-    client = None
+	client = None
 
 def run():
 	CGIHandler().run(runSentry)
