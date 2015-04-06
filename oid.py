@@ -73,7 +73,7 @@ def run(request):
 		#print "CANCEL" #TODO: be angry
 
 	#elif info.status ==  SETUP_NEEDED:
-		pass
+	#	pass
 		#print "setup needed for: "  + info.setup_url #TODO: Tell the users that they have got something to do.
 
 	else:
