@@ -15,7 +15,7 @@ def create(cur):
 	cur.execute ("INSERT INTO sessions (sid, uid, oid) VALUES (%s, NULL, '')", (sid,))
 	return (sid, 201)
 
-def destroy():
+def destroy(do, cur):
 	if len(do) != 3:
 		return ("Exactly three parameters are needed.", 400)
 	sid = do[2]
