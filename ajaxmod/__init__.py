@@ -2,6 +2,7 @@ from werkzeug.wrappers import Response
 
 import session
 import oid
+import first_login
 
 def run(request, jsonenc, jsondec, cur):
 	do = request.args.get("do", "nothing").split("|");
@@ -24,13 +25,8 @@ def run(request, jsonenc, jsondec, cur):
 			uid = get_uid_from_sid(cur, do[2])
 			if uid != None:
 				if do[1] == "check":
-					cur.execute("SELECT first_login FROM users WHERE uid=%s", (str(uid),))
-					result = cur.fetchall()
-					if len(result) != 0:
-						response = Response(str(result[0][0]), 200)
-					else:
-						response = Response("This was not found in the database.", 412)
-
+					res = first_login.check(cur, uid)
+					response = Response(*res)
 				if do[1] == "get":
 					cur.execute("SELECT * FROM users WHERE uid=%s", (str(uid),))
 					result = cur.fetchall()
