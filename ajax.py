@@ -2,7 +2,6 @@
 from werkzeug.wrappers import Request, Response
 from werkzeug.urls import Href
 from json import JSONEncoder, JSONDecoder
-import time
 import random
 from openid.consumer.consumer import Consumer
 from openid.consumer.discover import DiscoveryFailure

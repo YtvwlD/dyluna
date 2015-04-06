@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-import sys
-import os
 from wsgiref.handlers import CGIHandler
-
 from werkzeug.wrappers import Response
+
 from get_html import get_html
 
 app = None
