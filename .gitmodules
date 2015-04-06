@@ -1,0 +1,15 @@
+[submodule "submodules/bootstrap"]
+	path = submodules/bootstrap
+	url = https://github.com/twbs/bootstrap
+[submodule "submodules/codeorigin.jquery.com"]
+	path = submodules/codeorigin.jquery.com
+	url = https://github.com/jquery/codeorigin.jquery.com
+[submodule "submodules/raven-js"]
+	path = submodules/raven-js
+	url = https://github.com/getsentry/raven-js
+[submodule "submodules/spin.js"]
+	path = submodules/spin.js
+	url = https://github.com/fgnass/spin.js
+[submodule "submodules/Font-Awesome"]
+	path = submodules/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome
