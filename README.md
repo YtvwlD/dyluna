@@ -1,7 +1,10 @@
-# dyluna
+# dyluna #
+
+[![Code Health](https://landscape.io/github/YtvwlD/dyluna/master/landscape.svg?style=plastic)](https://landscape.io/github/YtvwlD/dyluna/master)
+
 a framework for browser games made with Bootstrap, JQuery, Python, Werkzeug and MySQL
 
-## How to use it
+## How to use it ##
 Simply see what to replace:
 
 	grep -R REPLACE .
