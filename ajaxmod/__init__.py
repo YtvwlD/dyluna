@@ -28,17 +28,8 @@ def run(request, jsonenc, jsondec, cur):
 					res = first_login.check(cur, uid)
 					response = Response(*res)
 				if do[1] == "get":
-					cur.execute("SELECT * FROM users WHERE uid=%s", (str(uid),))
-					result = cur.fetchall()
-					if len(result) != 0:
-						username = result[0][1]
-						email = result[0][3]
-						jsonresp = jsonenc.encode({"username": username, "email": email})
-						response = Response(jsonresp, 200)
-					else:
-						response = Response("This was not found in the database.", 412)
-
-
+					res = first_login.get(cur, uid, jsonenc)
+					response = Response(*res)
 				if do[1] == "save":
 					if do[3]:
 						print do[3]
