@@ -31,41 +31,11 @@ def run(request, jsonenc, jsondec, cur):
 					res = first_login.get(cur, uid, jsonenc)
 					response = Response(*res)
 				if do[1] == "save":
-					if do[3]:
-						print do[3]
-						jsonreq = jsondec.decode(do[3])
-						print jsonreq
-						email = jsonreq["email"]
-						print email
-						username = jsonreq["username"]
-						print username
-						cur.execute("SELECT uid FROM users WHERE username=%s", (username,))
-						results = cur.fetchall()
-						username_already_taken = False
-						for result in results:
-							if result[0] != uid:
-								username_already_taken = True
-						cur.execute("SELECT uid FROM users WHERE email=%s", (email,))
-						results = cur.fetchall()
-						email_already_in_use = False
-						for result in results:
-							if result[0] != uid:
-								email_already_in_use = True
-
-						if username_already_taken:
-							response = Response("This username is already taken.", 412);
-						elif email_already_in_use:
-							response = Response("This email is already in use.", 412);
-						else:
-							cur.execute("UPDATE users SET email=%s WHERE uid=%s", (email, str(uid)))
-							cur.execute("UPDATE users SET username=%s WHERE uid=%s", (username, str(uid)))
-							response = Response("", 202)
-							#TODO save the data, confirm the email and so on
-
+					res = first_login.save(do, jsondec, cur)
+					response = Response(*res)
 				if do[1] == "do":
 					cur.execute("UPDATE users SET first_login = false WHERE uid=%s", (str(uid),))
 					response = Response("", 202)
-
 			else:
 				response = Response("This was not found in the database.", 412)
 
