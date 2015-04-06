@@ -1,32 +1,18 @@
 from werkzeug.wrappers import Response
 from werkzeug.urls import Href
-import random
 from openid.consumer.consumer import Consumer
 from openid.consumer.discover import DiscoveryFailure
 from openid.sreg import SRegRequest
+
+import session
 
 def run(request, jsonenc, jsondec, cur):
 	do = request.args.get("do", "nothing").split("|");
 	response = Response("Wrong parameters.", 400)
 	if do[0] == "session":
 		if do[1] == "create":
-			#taken from http://love-python.blogspot.de/2010/04/python-code-to-generate-random-string.html
-			sid = ''
-			randstr = "abcdefghijklmnopqrstuvwxyz"
-			randstr += randstr.upper()
-			randints = ""
-			for n in range(10):
-				randints += str(n)
-			randstr += randints * 17
-			for i in range(32):
-				sid += random.choice(randstr)
-			#end taken
-			cur.execute ("INSERT INTO sessions (sid, uid, oid) VALUES (%s, NULL, '')", (sid,))
-
+			sid = session.create(cur)
 			response = Response(sid, 201)
-
-
-
 		if do[1] == "destroy":
 			if len(do) != 3:
 				response = Response("Exactly three parameters are needed.", 400)
