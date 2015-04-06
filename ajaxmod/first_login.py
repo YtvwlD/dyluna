@@ -15,9 +15,9 @@ def get(cur, uid, jsonenc):
 	jsonresp = jsonenc.encode({"username": username, "email": email})
 	return (jsonresp, 200)
 
-def save(do, jsondec, cur):
+def save(do, jsondec, cur, uid):
 	if not do[3]:
-		return ("No data has been passed.", 400)
+		return ("No JSON has been passed.", 400)
 	jsonreq = jsondec.decode(do[3])
 	email = jsonreq["email"]
 	username = jsonreq["username"]
@@ -42,3 +42,7 @@ def save(do, jsondec, cur):
 	cur.execute("UPDATE users SET username=%s WHERE uid=%s", (username, str(uid)))
 	return ("", 202)
 	#TODO save the data, confirm the email and so on
+
+def do(cur, uid):
+	cur.execute("UPDATE users SET first_login = false WHERE uid=%s", (str(uid),))
+	return ("", 202)
