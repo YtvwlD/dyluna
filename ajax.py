@@ -15,10 +15,7 @@ def run(request):
 	jsondec = JSONDecoder()
 	con = SQLcon.con()
 	cur = con.cursor()
-	try:
-		do = request.args.get("do").split("|");
-	except:
-		do = [ "nothing" ]
+	do = request.args.get("do", "nothing").split("|");
 	response = Response("Wrong parameters.", 400)
 	if do[0] == "session":
 		if do[1] == "create":

@@ -37,12 +37,12 @@ def run(request):
 
 		try:
 			nickname = sregresp.data["nickname"]
-		except:
+		except (AttributeError, KeyError):
 			nickname = ""
 
 		try:
 			email = sregresp.data["email"]
-		except:
+		except (AttributeError, KeyError):
 			email = ""
 
 		#TODO:
