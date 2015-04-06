@@ -1,1 +1,1 @@
-../submodules/codeorigin.jquery.com/cdn/jquery.js
+../submodules/codeorigin.jquery.com/cdn/jquery-2.1.3.js
