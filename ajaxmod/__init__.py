@@ -1,5 +1,4 @@
 from werkzeug.wrappers import Response
-from openid.sreg import SRegRequest
 
 import session
 import oid
@@ -16,23 +15,9 @@ def run(request, jsonenc, jsondec, cur):
 	if do[0] == "openid":
 		if do[1] == "do":
 			res = oid.do(do, cur, request)
-			response = Response(*res)
 		if do[1] == "check":
-			if len(do) != 3:
-				response = Response("The sid is missing.", 400)
-			else:
-				sid = do[2]
-				cur.execute("SELECT * FROM sessions WHERE sid=%s", (sid,))
-				result = cur.fetchall()
-				if len(result) == 0:
-					response = Response("This sid was not found in the database.", 412)
-				elif len(result) > 1:
-					response = Response("This sid exists. Multiple times. What?!", 500)
-				else:
-					if result[0][2] != "":
-						response = Response("SUCCESS", 202)
-					else:
-						response = Response("FAILURE", 401)
+			res = oid.check(do, cur)
+		response = Response(*res)
 
 	if do[0] == "first_login":
 		if do[2]:
