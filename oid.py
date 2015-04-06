@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from werkzeug.wrappers import Request, Response
 from werkzeug.urls import Href
-from openid.consumer.consumer import Consumer
+from openid.consumer.consumer import Consumer, SUCCESS #, CANCEL, SETUP_NEEDED
 from openid.sreg import SRegResponse
 
 from get_html import get_html, choose_lang
@@ -24,7 +24,7 @@ def run(request):
 #	except Exception as e:
 #	info = openid.consumer.consumer.Response()
 #	info.status = e
-	if info.status == openid.consumer.consumer.SUCCESS:
+	if info.status == SUCCESS:
 		#print "SUCCESS" #TODO: do something here
 		display_identifier =  info.getDisplayIdentifier()
 		sregresp = SRegResponse.fromSuccessResponse(info)
@@ -68,12 +68,12 @@ def run(request):
 		response = Response(get_html("oid_success", lang), 200, mimetype="text/html")
 
 
-	#elif info.status == openid.consumer.consumer.CANCEL:
+	#elif info.status == CANCEL:
 	#	pass
 		#print "CANCEL" #TODO: be angry
 
-	#elif info.status ==  openid.consumer.consumer.SETUP_NEEDED:
-	#	pass
+	#elif info.status ==  SETUP_NEEDED:
+		pass
 		#print "setup needed for: "  + info.setup_url #TODO: Tell the users that they have got something to do.
 
 	else:
