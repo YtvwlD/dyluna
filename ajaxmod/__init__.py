@@ -1,10 +1,8 @@
 from werkzeug.wrappers import Response
-from werkzeug.urls import Href
-from openid.consumer.consumer import Consumer
-from openid.consumer.discover import DiscoveryFailure
 from openid.sreg import SRegRequest
 
 import session
+import oid
 
 def run(request, jsonenc, jsondec, cur):
 	do = request.args.get("do", "nothing").split("|");
@@ -12,42 +10,13 @@ def run(request, jsonenc, jsondec, cur):
 	if do[0] == "session":
 		if do[1] == "create":
 			res = session.create(cur)
-			response = Response(*res)
 		if do[1] == "destroy":
 			res = session.destroy(do, cur)
-			response = Response(*res)
+		response = Response(*res)
 	if do[0] == "openid":
 		if do[1] == "do":
-			if len(do) != 4:
-				response = Response("Exactly four parameters are needed.", 400)
-			else:
-				sid = do[2]
-				oid = do[3]
-				cur.execute("SELECT * FROM sessions WHERE sid=%s", (sid,))
-				result = cur.fetchall()
-				if len(result) == 0:
-					response = Response("This sid was not found in the database.", 412)
-				elif len(result) > 1:
-					response = Response("This sid exists. Multiple times. What?!", 500)
-				else:
-					try:
-						consumer = Consumer({"sid": sid}, None)
-						authreq = consumer.begin(oid)
-						sregreq = SRegRequest(required=["nickname", "email"]) #TODO: Perhaps declare this as optional and ask the user later if it's right?
-						authreq.addExtension(sregreq)
-						myURL = request.url
-						print "myURL: " + myURL
-						href = Href(myURL)
-						baseURL = href("../")
-						print "baseURL: " + baseURL
-						oidURL = href("../oid.py", {"sid": sid}) #Should work now.
-						print "oidURL: " + oidURL
-						rurl = authreq.redirectURL(baseURL, oidURL) #TODO implement redirect
-						print "rurl: " + rurl
-						response = Response(rurl, 202)
-					except DiscoveryFailure:
-						response = Response("This is no OpenID.", 417)
-
+			res = oid.do(do, cur, request)
+			response = Response(*res)
 		if do[1] == "check":
 			if len(do) != 3:
 				response = Response("The sid is missing.", 400)
