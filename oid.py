@@ -68,9 +68,8 @@ def run(request):
 		response = Response(get_html("oid_success", lang), 200, mimetype="text/html")
 
 
-	#elif info.status == CANCEL:
-	#	pass
-		#print "CANCEL" #TODO: be angry
+	elif info.status == CANCEL:
+		response = Response(get_html("oid_failure", lang), 401, mimetype="text/html")
 
 	#elif info.status ==  SETUP_NEEDED:
 	#	pass
