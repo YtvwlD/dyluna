@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from werkzeug.wrappers import Request, Response
 from werkzeug.urls import Href
-from openid.consumer.consumer import Consumer, SUCCESS #, CANCEL, SETUP_NEEDED
+from openid.consumer.consumer import Consumer, SUCCESS, CANCEL#, SETUP_NEEDED
 from openid.sreg import SRegResponse
 
 from get_html import get_html, choose_lang
