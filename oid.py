@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from werkzeug.wrappers import Request, Response
 from werkzeug.urls import Href
-from openid.consumer.consumer import Consumer, SUCCESS, CANCEL#, SETUP_NEEDED
+from openid.consumer.consumer import Consumer, SUCCESS, CANCEL, SETUP_NEEDED
 from openid.sreg import SRegResponse
 
 from get_html import get_html, choose_lang
@@ -71,10 +71,10 @@ def run(request):
 	elif info.status == CANCEL:
 		response = Response(get_html("oid_failure", lang), 401, mimetype="text/html")
 
-	#elif info.status ==  SETUP_NEEDED:
-	#	pass
-		#print "setup needed for: "  + info.setup_url #TODO: Tell the users that they have got something to do.
-
+	elif info.status ==  SETUP_NEEDED:
+		html = get_html("oid_setup_needed", lang)
+		html = html.replace("<!-- URL -->", info.setup_url)
+		response = Response(html, 423, mimetype="text/html")
 	else:
 		#print "something went wrong." #TODO: something went wrong.
 		response = Response(get_html("oid_failure", lang), 500, mimetype="text/html")
