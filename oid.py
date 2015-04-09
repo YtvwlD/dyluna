@@ -10,12 +10,9 @@ import SQLcon
 
 @Request.application
 def run(request):
-	response = Response("This didn't succeed.", 500)
 	lang = choose_lang(request)
-	
 	sid = request.args.get("sid")
 	consumer = Consumer({"sid": sid}, None)
-	#url = request.args.get("openid.return_to") #TODO: compute the URL in a better way -> Should be done now.
 	href = Href(request.urls)
 	url = href("../oid.py", {"sid": sid})
 #	try:
@@ -24,38 +21,33 @@ def run(request):
 #	except Exception as e:
 #	info = openid.consumer.consumer.Response()
 #	info.status = e
+	if info.status == CANCEL:
+		return Response(get_html("oid_failure", lang), 401, mimetype="text/html")
+	if info.status ==  SETUP_NEEDED:
+		html = get_html("oid_setup_needed", lang)
+		html = html.replace("<!-- URL -->", info.setup_url)
+		return Response(html, 423, mimetype="text/html")
 	if info.status == SUCCESS:
-		#print "SUCCESS" #TODO: do something here
 		display_identifier =  info.getDisplayIdentifier()
 		sregresp = SRegResponse.fromSuccessResponse(info)
 		realoid = display_identifier
 		if info.endpoint.canonicalID:
 			realoid = info.endpoint.canonicalID
-		#print "The real OID is " + realoid + "."
-		#print "We have gotten the following data: "
-		#print sregresp.data
-
 		try:
 			nickname = sregresp.data["nickname"]
 		except (AttributeError, KeyError):
 			nickname = ""
-
 		try:
 			email = sregresp.data["email"]
 		except (AttributeError, KeyError):
 			email = ""
-
-		#TODO:
 		con = SQLcon.con()
 		cur = con.cursor()
 		cur.execute("SELECT * FROM users WHERE openid=%s", (realoid,))
 		result = cur.fetchall()
 		if result.__len__() == 0:
 			cur.execute("INSERT INTO users (username, openid, email, first_login) VALUES (%s, %s, %s, true)", (nickname, realoid, email))
-
-
 		#log in
-
 		cur.execute("SELECT uid FROM users WHERE openid=%s", (realoid,))
 		result = cur.fetchall()
 		uid = result[0][0]
@@ -63,25 +55,10 @@ def run(request):
 		cur.execute("UPDATE sessions SET uid=%s WHERE sid=%s", (str(uid), sid))
 		cur.execute("UPDATE sessions SET oid=%s WHERE sid=%s", (realoid, sid))
 		con.close()
-
-
-		response = Response(get_html("oid_success", lang), 200, mimetype="text/html")
-
-
-	elif info.status == CANCEL:
-		response = Response(get_html("oid_failure", lang), 401, mimetype="text/html")
-
-	elif info.status ==  SETUP_NEEDED:
-		html = get_html("oid_setup_needed", lang)
-		html = html.replace("<!-- URL -->", info.setup_url)
-		response = Response(html, 423, mimetype="text/html")
-	else:
-		#print "something went wrong." #TODO: something went wrong.
-		response = Response(get_html("oid_failure", lang), 500, mimetype="text/html")
-
-
-	#TODO
-	return response
+		return Response(get_html("oid_success", lang), 200, mimetype="text/html")
+	#Something went wrong.
+	#TODO: More investigation.
+	return Response(get_html("oid_failure", lang), 500, mimetype="text/html")
 
 if __name__ == "__main__":
 	import CGI
