@@ -13,7 +13,7 @@ def run(request):
 	lang = choose_lang(request)
 	sid = request.args.get("sid")
 	consumer = Consumer({"sid": sid}, None)
-	href = Href(request.urls)
+	href = Href(request.url)
 	url = href("../oid.py", {"sid": sid})
 #	try:
 	info = consumer.complete(request.args, url) # <-- It crashes here. (When using an OpenID from Yahoo!)
