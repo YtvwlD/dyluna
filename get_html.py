@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from os import listdir
 
 def get_html(html_file, lang):

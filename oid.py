@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 from werkzeug.wrappers import Request, Response
 from werkzeug.urls import Href
 from openid.consumer.consumer import Consumer, SUCCESS, CANCEL, SETUP_NEEDED

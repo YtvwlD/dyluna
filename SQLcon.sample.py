@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 from mysql.connector import connect
 if __name__ == "__main__":
 	import sys

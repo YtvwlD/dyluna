@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 from os import path
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import SharedDataMiddleware, DispatcherMiddleware
