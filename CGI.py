@@ -1,5 +1,6 @@
 from wsgiref.handlers import CGIHandler
 from werkzeug.wrappers import Request, Response
+#from werkzeug.debug import DebuggedApplication
 
 from get_html import get_html, choose_lang
 
@@ -13,6 +14,8 @@ except ImportError: #if Sentry isn't configured, everything is alright, but if S
 
 def run():
 	CGIHandler().run(runSentry)
+	#CGIHandler().run(DebuggedApplication(app))
+
 
 def runSentry(environ, start_response):
 	lang = choose_lang(Request(environ))
