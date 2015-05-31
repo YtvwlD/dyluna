@@ -2,14 +2,20 @@
 from os import path
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import SharedDataMiddleware, DispatcherMiddleware
+from werkzeug.wrappers import Request, Response
 
 import index
 import ajax
 import oid
 import nojs
 
-app = SharedDataMiddleware(DispatcherMiddleware(index.run,
+@Request.application
+def notfound(request):
+	return Response("Not found.", 404)
+
+app = SharedDataMiddleware(DispatcherMiddleware(notfound,
 	{
+	"/":			index.run,
 	"/index.py":	index.run,
 	"/ajax.py":		ajax.run,
 	"/oid.py":		oid.run,
