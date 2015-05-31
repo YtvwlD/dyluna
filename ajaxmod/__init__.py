@@ -2,6 +2,7 @@ from werkzeug.wrappers import Response
 
 import session
 import oid
+import userpass
 import first_login
 
 def run(request, jsonenc, jsondec, cur):
@@ -19,6 +20,11 @@ def run(request, jsonenc, jsondec, cur):
 			res = oid.do(do, cur, request)
 		if do[1] == "check":
 			res = oid.check(do, cur)
+	if do[0] == "userpass":
+		if do[1] == "login":
+			res = userpass.login(do, cur)
+		if do[1] == "register":
+			pass #TODO
 	if do[0] == "first_login":
 		if not do[2]:
 			return Response("No SID has been passed.", 400)
