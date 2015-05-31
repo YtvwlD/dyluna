@@ -1,8 +1,6 @@
 from werkzeug.wrappers import Response
 
-import session
-import oid
-import first_login
+from . import *
 
 def run(request, jsonenc, jsondec, cur):
 	do = request.args.get("do", "nothing").split("|");
