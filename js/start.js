@@ -11,6 +11,7 @@ function loadscript(script)
 //pages
 function loadpage(ppage)
 {
+	console.log("Loading page " + ppage + "...");
 	spindiv();
 	spindivtext("Seite");
 	page = ppage;
@@ -35,7 +36,6 @@ function loadpage(ppage)
 			unspindiv();
 		});
 	}, 1000);
-	unspindiv();
 }
 
 jQuery("b").remove();
