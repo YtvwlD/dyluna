@@ -5,7 +5,7 @@ from get_html import get_html, choose_lang
 
 @Request.application
 def run(request):
-	lang = choose_lang(request)
+	lang = request.args.get("lang") if request.args.get("lang") else choose_lang(request)
 	if request.url.startswith("https://") or request.args.get("forcenossl") == "true":
 		html = get_html("launch", lang)
 	else:
