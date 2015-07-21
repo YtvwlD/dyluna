@@ -1,0 +1,54 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">{{nav-sr-toggle}}</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">{{nav-brand}}</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li id=landing class="active landing"><a href="#">{{nav-page-landing}}</a></li>
+				<li id=home class=loggedin ><a href="#" onclick="loadpage('home');">{{nav-page-home}}</a></li>
+				<!--<li><a href="#contact">Contact</a></li>-->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{nav-more}} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<!--<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>-->
+							<li class="divider"></li>
+							<!--<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>-->
+							<li><a href="#" onclick='jQuery("#REPLACE_GAME_NAME-info").modal("show");'>{{nav-about}}</a></li>
+						</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class=landing ><a href="#" onclick='oid_modal();'>{{nav-login}}</a></li>
+				<li class=loggedin ><a href="#" onclick="logout();">{{nav-logout}}</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="REPLACE_GAME_NAME-info" tabindex="-1" role="dialog" aria-labelledby="myShow-info-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="REPLACE_GAME_NAME-info-label">{{nav-about-title}}</h4>
+			</div>
+			<div class="modal-body" style="padding-bottom: 10px;">
+				{{{nav-about-text}}}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{close}}</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

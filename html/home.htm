@@ -4,62 +4,59 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="first_login-label">Erste Anmeldung</h4>
+        <h4 class="modal-title" id="first_login-label">{{home-first-login-label}}</h4>
       </div>
       <form onSubmit="first_login(); return false;">
 	<div class="modal-body" style="padding-bottom: 10px;">
 		<div id="first_login-noInput" class="alert alert-danger">
-			<strong>Keine Eingabe!</strong>
-			Da muss schon was stehen.
+			<strong>{{home-first-login-no-input-label}}</strong>
+			{{home-first-login-no-input-text}}
 		</div>
 		<div id="first_login-error" class="alert alert-warning">
-			<strong>Fehler!</strong>
-			Dies hat leider nicht geklappt.
-			Du kannst es aber gerne erneut versuchen.
+			<strong>{{home-first-login-error-label}}</strong>
+			{{home-first-login-error-text}}
 		</div>
 		<div id="first_login-success" class="alert alert-success">
-			<strong>Geschafft!</strong>
-			Deine Daten wurden gespeichert.
+			<strong>{{success}}</strong>
+			{{home-first-login-success-text}}
 		</div>
 		<p>
-			Dies ist deine erste Anmeldung.<br /><br />
-			Wir haben von deinem OpenID-Provider einige Daten erhalten.<br />
-			Bitte &uuml;berpr&uuml;fe, ob diese stimmen, und korrigiere sie gegebenenfalls.
+			{{{home-first-login-text}}}
 		</p>
 		<div class="form-group row">
-			<label id="username-label" class="control-label col-sm-3" style="display: block;">Benutzername: </label>
+			<label id="username-label" class="control-label col-sm-3" style="display: block;">{{home-first-login-user-label}}: </label>
 			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="username">username</em>
 			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
 				<label class="btn btn-primary active">
-					<input id="username-right" type="radio" name="username" checked /> Stimmt.
+					<input id="username-right" type="radio" name="username" checked /> {{home-first-login-correct}}
 				</label>
 				<label class="btn btn-primary">
-					<input id="username-wrong" type="radio" name="username"/> Stimmt nicht.
+					<input id="username-wrong" type="radio" name="username"/> {{home-first-login-wrong}}
 				</label>
 			</div>
 			<div id="username-correct" class="col-sm-4" style="display: none;">
-				<input type="text" class="form-control" id="username-correct-text" placeholder="Benutzername"/>
+				<input type="text" class="form-control" id="username-correct-text" placeholder="{{home-first-login-user-label}}"/>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label id="email-label" class="control-label col-sm-3" style="display: block;">E-Mail: </label>
+			<label id="email-label" class="control-label col-sm-3" style="display: block;">{{home-first-login-email-label}}: </label>
 			<em class="form-control-static col-sm-3 text-success" style="display: block;" id="email">email</em>
 			<div class="btn-group btn-group-sm col-sm-5" data-toggle="buttons">
 				<label class="btn btn-primary active">
-					<input id="email-right" type="radio" name="email" checked /> Stimmt.
+					<input id="email-right" type="radio" name="email" checked /> {{home-first-login-correct}}
 				</label>
 				<label class="btn btn-primary">
-					<input id="email-wrong" type="radio" name="email"/> Stimmt nicht.
+					<input id="email-wrong" type="radio" name="email"/> {{home-first-login-wrong}}
 				</label>
 			</div>
 			<div id="email-correct" class="col-sm-4" style="display: none;">
-				<input type="text" class="form-control" id="email-correct-text" placeholder="E-Mail"/>
+				<input type="text" class="form-control" id="email-correct-text" placeholder="{{home-first-login-email-label}}"/>
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Nicht jetzt</button>
-		<button id="first_login-save" type="button" class="btn btn-primary" onclick="first_login();" data-loading-text="Laden...">Weiter &raquo;</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">{{home-first-login-not-now}}</button>
+		<button id="first_login-save" type="button" class="btn btn-primary" onclick="first_login();" data-loading-text="{{home-first-login-loading}}">{{next}} &raquo;</button>
 	</div>
       </form>
     </div><!-- /.modal-content -->

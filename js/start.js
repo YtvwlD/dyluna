@@ -13,13 +13,13 @@ function loadpage(ppage)
 {
 	console.log("Loading page " + ppage + "...");
 	spindiv();
-	spindivtext("Seite");
+	//spindivtext(ppage);
 	page = ppage;
 	jQuery(".active").toggleClass("active");
 	jQuery("#" + page).toggleClass("active");
 	loadcss(page);
-	jQuery("#page").load("html/" + lang + "/" + page + ".htm");
-	setTimeout(function() {
+	translate(page, function() {
+		jQuery("#page").html(translated[page]);
 		jQuery.getScript("js/" + page + ".js", function() {
 			try
 			{
@@ -35,12 +35,68 @@ function loadpage(ppage)
 			}
 			unspindiv();
 		});
-	}, 1000);
+	});
+}
+
+function getTranslation(page, callback)
+{
+	if (translations[page] == undefined)
+	{
+		jQuery.getJSON("/html/lang/" + lang + "/" + page + ".json", function(translation) {
+				translations[page] = translation;
+				callback();
+		});
+	}
+	else
+	{
+		callback();
+	}
+}
+
+function getTemplate(page, callback)
+{
+	if (templates[page] == undefined)
+	{
+		jQuery.get("/html/" + page + ".htm", function(template) {
+				templates[page] = Handlebars.compile(template);
+				callback();
+		});
+	}
+	else
+	{
+		callback();
+	}
+}
+
+function translate(page, callback)
+{
+	if (translated[page] == undefined)
+	{
+		getTemplate(page, function() {
+			getTranslation(page, function() {
+				getTranslation("general", function() {
+					var translation = translations["general"];
+					jQuery.extend(translation, translations[page]);
+					translated[page] = templates[page](translation);
+					callback();
+				});
+			});
+		});
+	}
+	else
+	{
+		callback();
+	}
 }
 
 jQuery("b").remove();
+var page;
+var translations = {};
+var templates = {};
+var translated = {};
 var sid = "";
 var lang = document.documentElement.lang; //|| "None";
+
 jQuery(document.head).append("<title>REPLACE_GAME_NAME</title>");
 jQuery(document.head).append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
 document.body.onunload = function () {
@@ -57,7 +113,7 @@ jQuery.getScript("js/bootstrap.js");
 jQuery.getScript("js/sentry.js", function () {
 	jQuery.getScript("js/raven.js", function() {
 		Raven.config((("https:" == document.location.protocol) ? "https" : "http") + get_sentry_dsn(), {
-			whitelistUrls: [REPLACE_DOMAIN], //escape it: "/sub\.domain.\tld/"
+			whitelistUrls: ["REPLACE_DOMAIN"], //escape it: "/sub\.domain.\tld/"
 			logger: "web",
 			site: document.baseURI
 		}).install();
@@ -65,15 +121,15 @@ jQuery.getScript("js/sentry.js", function () {
 	});
 });
 jQuery("body").append("<div id=nav></div>");
-jQuery("#nav").load("html/" + lang + "/nav.htm");
-setTimeout(function() {
-	jQuery.getScript("js/nav.js", function() {
-		runNav();
-	});
-}, 1000);
-
 jQuery("body").append("<div id=page class=container style=\"padding-top: 70px; padding-bottom: 30px; display: none;\"></div>");
-var page;
-
-unspindiv();
-loadpage("landing");
+//jQuery.getScript("js/handlebars-runtime.js"); //TODO: Precompile?
+jQuery.getScript("js/handlebars.js", function() {
+	translate("nav", function() {
+		jQuery("#nav").html(translated["nav"]);
+		jQuery.getScript("js/nav.js", function() {
+			runNav();
+		});
+	});
+	unspindiv();
+	loadpage("landing");
+});
