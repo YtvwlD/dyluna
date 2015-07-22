@@ -17,7 +17,7 @@ function loadpage(ppage)
 	page = ppage;
 	jQuery(".active").toggleClass("active");
 	jQuery("#" + page).toggleClass("active");
-	loadcss(page);
+	jQuery("#page-css")[0].href = "/css/" + page + ".css";
 	translate(page, function() {
 		jQuery("#page").html(translated[page]);
 		jQuery.getScript("js/" + page + ".js", function() {
@@ -109,6 +109,7 @@ loadcss("bootstrap");
 loadcss("bootstrap-theme");
 loadcss("font-awesome");
 jQuery.ajaxSetup({ cache: true });
+jQuery(document.head).append("<link id=\"page-css\" rel=\"stylesheet\" type=\"text/css\"></style>");
 jQuery.getScript("js/bootstrap.js");
 jQuery.getScript("js/sentry.js", function () {
 	jQuery.getScript("js/raven.js", function() {
