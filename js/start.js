@@ -1,12 +1,4 @@
 "use strict";
-//scripts
-function loadscript(script)
-{
-	var js = document.createElement("script");
-	js.src = "js/" + script + ".js";
-	js.type = "text/javascript";
-	document.head.appendChild(js);
-}
 
 //pages
 function loadpage(ppage)
