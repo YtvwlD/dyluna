@@ -7,12 +7,12 @@ function loadpage(ppage)
 	spindiv();
 	//spindivtext(ppage);
 	page = ppage;
-	jQuery(".active").toggleClass("active");
-	jQuery("#" + page).toggleClass("active");
-	jQuery("#page-css")[0].href = "/css/" + page + ".css";
+	$(".active").toggleClass("active");
+	$("#" + page).toggleClass("active");
+	$("#page-css")[0].href = "/css/" + page + ".css";
 	translate(page, function() {
-		jQuery("#page").html(translated[page]);
-		jQuery.getScript("js/" + page + ".js", function() {
+		$("#page").html(translated[page]);
+		$.getScript("js/" + page + ".js", function() {
 			try
 			{
 				runPage();
@@ -34,7 +34,7 @@ function getTranslation(page, callback)
 {
 	if (translations[page] == undefined)
 	{
-		jQuery.getJSON("/html/lang/" + lang + "/" + page + ".json", function(translation) {
+		$.getJSON("/html/lang/" + lang + "/" + page + ".json", function(translation) {
 				translations[page] = translation;
 				callback();
 		});
@@ -49,7 +49,7 @@ function getTemplate(page, callback)
 {
 	if (templates[page] == undefined)
 	{
-		jQuery.get("/html/" + page + ".htm", function(template) {
+		$.get("/html/" + page + ".htm", function(template) {
 				templates[page] = Handlebars.compile(template);
 				callback();
 		});
@@ -68,7 +68,7 @@ function translate(page, callback)
 			getTranslation(page, function() {
 				getTranslation("general", function() {
 					var translation = translations["general"];
-					jQuery.extend(translation, translations[page]);
+					$.extend(translation, translations[page]);
 					translated[page] = templates[page](translation);
 					callback();
 				});
@@ -81,7 +81,7 @@ function translate(page, callback)
 	}
 }
 
-jQuery("b").remove();
+$("b").remove();
 var page;
 var translations = {};
 var templates = {};
@@ -89,22 +89,22 @@ var translated = {};
 var sid = "";
 var lang = document.documentElement.lang; //|| "None";
 
-jQuery(document.head).append("<title>REPLACE_GAME_NAME</title>");
-jQuery(document.head).append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+$(document.head).append("<title>REPLACE_GAME_NAME</title>");
+$(document.head).append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
 document.body.onunload = function () {
 		if(sid != "")
 		{
-			var sidreq = jQuery.get("ajax.py?do=session|destroy|" + sid);
+			var sidreq = $.get("ajax.py?do=session|destroy|" + sid);
 		}
 	};
 loadcss("bootstrap");
 loadcss("bootstrap-theme");
 loadcss("font-awesome");
-jQuery.ajaxSetup({ cache: true });
-jQuery(document.head).append("<link id=\"page-css\" rel=\"stylesheet\" type=\"text/css\"></style>");
-jQuery.getScript("js/bootstrap.js");
-jQuery.getScript("js/sentry.js", function () {
-	jQuery.getScript("js/raven.js", function() {
+$.ajaxSetup({ cache: true });
+$(document.head).append("<link id=\"page-css\" rel=\"stylesheet\" type=\"text/css\"></style>");
+$.getScript("js/bootstrap.js");
+$.getScript("js/sentry.js", function () {
+	$.getScript("js/raven.js", function() {
 		Raven.config((("https:" == document.location.protocol) ? "https" : "http") + get_sentry_dsn(), {
 			whitelistUrls: ["REPLACE_DOMAIN"], //escape it: "/sub\.domain.\tld/"
 			logger: "web",
@@ -113,13 +113,13 @@ jQuery.getScript("js/sentry.js", function () {
 		Raven.setUser(); //anonymous
 	});
 });
-jQuery("body").append("<div id=nav></div>");
-jQuery("body").append("<div id=page class=container style=\"padding-top: 70px; padding-bottom: 30px; display: none;\"></div>");
-//jQuery.getScript("js/handlebars-runtime.js"); //TODO: Precompile?
-jQuery.getScript("js/handlebars.js", function() {
+$("body").append("<div id=nav></div>");
+$("body").append("<div id=page class=container style=\"padding-top: 70px; padding-bottom: 30px; display: none;\"></div>");
+//$.getScript("js/handlebars-runtime.js"); //TODO: Precompile?
+$.getScript("js/handlebars.js", function() {
 	translate("nav", function() {
-		jQuery("#nav").html(translated["nav"]);
-		jQuery.getScript("js/nav.js", function() {
+		$("#nav").html(translated["nav"]);
+		$.getScript("js/nav.js", function() {
 			runNav();
 		});
 	});
