@@ -15,6 +15,19 @@ def create(cur):
 	cur.execute ("INSERT INTO sessions (sid, uid, oid) VALUES (%s, NULL, '')", (sid,))
 	return (sid, 201)
 
+def check(do, cur):
+	if len(do) != 3:
+		return ("Exactly three parameters are needed.", 400)
+	sid = do[2]
+	cur.execute("SELECT * FROM sessions WHERE sid=%s", (sid,))
+	result = cur.fetchall()
+	if len(result) == 0:
+		return ("This sid was not found in the database.", 412)
+	result = result[0]
+	if result[1]: #uid set
+		return ("This sid was found and is logged in.", 200)
+	return ("This sid was found but is not logged in.", 302)
+
 def destroy(do, cur):
 	if len(do) != 3:
 		return ("Exactly three parameters are needed.", 400)

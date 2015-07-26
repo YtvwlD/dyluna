@@ -10,6 +10,8 @@ def run(request, jsonenc, jsondec, cur):
 	if do[0] == "session":
 		if do[1] == "create":
 			res = session.create(cur)
+		if do[1] == "check":
+			res = session.check(do, cur)
 		if do[1] == "destroy":
 			res = session.destroy(do, cur)
 	if do[0] == "openid":

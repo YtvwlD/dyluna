@@ -30,4 +30,4 @@ app = SharedDataMiddleware(DispatcherMiddleware(notfound,
 	})
 
 if __name__ == "__main__":
-	run_simple('localhost', 4000, app)
+	run_simple('0.0.0.0', 4000, app)

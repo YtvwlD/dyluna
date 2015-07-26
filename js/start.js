@@ -81,6 +81,8 @@ function translate(page, callback)
 	}
 }
 
+function apierror(data) {} //stub
+
 $("b").remove();
 var page;
 var translations = {};
@@ -126,3 +128,24 @@ $.getScript("js/handlebars.js", function() {
 	unspindiv();
 	loadpage("landing");
 });
+
+//get the SID
+if (localStorage.getItem("sid") != undefined)
+{
+	var sid = localStorage.getItem("sid");
+	$.get("/ajax.py?do=session|check|" + sid, function(data) {
+		if (data.status == 200) //already logged in
+		{
+			loadpage("home");
+		}
+		else if (data.status == 302) {} //SID exists, but is not logged in. Nothing to do here.
+		else if (data.status == 412) //SID doesn't exist anymore.
+		{
+			sid = "";
+		}
+		else
+		{
+			apierror(data);
+		}
+	});
+}
