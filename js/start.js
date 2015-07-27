@@ -11,7 +11,8 @@ function loadpage(ppage)
 	$("#page-css")[0].href = "/css/" + page + ".css";
 	translate(page, function() {
 		$("#page").html(translated[page]);
-		$.getScript("js/" + page + ".js", function() {
+		$.get("js/" + page + ".js", function(data) {
+			$("#page-js").html(data);
 			try
 			{
 				runPage();
@@ -115,6 +116,7 @@ $.getScript("js/sentry.js", function () {
 	});
 });
 $("body").append("<div id=nav></div>");
+$("body").append("<script id=\"page-js\"></script>");
 $("body").append("<div id=page class=container style=\"padding-top: 70px; padding-bottom: 30px; display: none;\"></div>");
 //$.getScript("js/handlebars-runtime.js"); //TODO: Precompile?
 $.getScript("js/handlebars.js", function() {
