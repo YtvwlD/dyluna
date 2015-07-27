@@ -93,12 +93,6 @@ var lang = document.documentElement.lang; //|| "None";
 
 $(document.head).append("<title>REPLACE_GAME_NAME</title>");
 $(document.head).append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
-document.body.onunload = function () {
-		if(sid != "")
-		{
-			var sidreq = $.get("ajax.py?do=session|destroy|" + sid);
-		}
-	};
 loadcss("bootstrap");
 loadcss("bootstrap-theme");
 loadcss("font-awesome");
