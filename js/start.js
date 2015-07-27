@@ -8,7 +8,7 @@ function loadpage(ppage)
 	page = ppage;
 	$(".active").toggleClass("active");
 	$("#" + page).toggleClass("active");
-	$("#page-css")[0].href = "/css/" + page + ".css";
+	$("#page-css")[0].href = "css/" + page + ".css";
 	translate(page, function() {
 		$("#page").html(translated[page]);
 		$.get("js/" + page + ".js", function(data) {
@@ -34,7 +34,7 @@ function getTranslation(page, callback)
 {
 	if (translations[page] == undefined)
 	{
-		$.getJSON("/html/lang/" + lang + "/" + page + ".json", function(translation) {
+		$.getJSON("html/lang/" + lang + "/" + page + ".json", function(translation) {
 				translations[page] = translation;
 				callback();
 		});
@@ -49,7 +49,7 @@ function getTemplate(page, callback)
 {
 	if (templates[page] == undefined)
 	{
-		$.get("/html/" + page + ".htm", function(template) {
+		$.get("html/" + page + ".htm", function(template) {
 				templates[page] = Handlebars.compile(template);
 				callback();
 		});
@@ -134,7 +134,7 @@ $.getScript("js/handlebars.js", function() {
 if (localStorage.getItem("sid") != undefined)
 {
 	var sid = localStorage.getItem("sid");
-	$.get("/ajax.py?do=session|check|" + sid, function(data) {
+	$.get("ajax.py?do=session|check|" + sid, function(data) {
 		if (data.status == 200) //already logged in
 		{
 			loadpage("home");
