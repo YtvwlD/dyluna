@@ -63,7 +63,7 @@ function openid()
 			sidreq.success(function (data) {
 				$("#creatingSession").hide();
 				sid = data;
-				localStory.setItem("sid", sid);
+				localStorage.setItem("sid", sid);
 				oid_sidisready(oid);
 			});
 		}
