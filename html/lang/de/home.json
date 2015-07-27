@@ -5,10 +5,7 @@
   "home-first-login-error-label": "Fehler!",
   "home-first-login-error-text": "Dies hat leider nicht geklappt. Du kannst es aber gerne erneut versuchen.",
   "home-first-login-success-text": "Deine Daten wurden gespeichert.",
-  "home-first-login-text":
-      "Dies ist deine erste Anmeldung. <br />
-      Wir heban von deinem OpenID-Provider einige Daten erhalten. <br />
-      Bitte übrprüfe, ob diese stimmen, und korrigiere sie gegebenenfalls.",
+  "home-first-login-text": "Dies ist deine erste Anmeldung. <br />Wir heban von deinem OpenID-Provider einige Daten erhalten. <br />Bitte übrprüfe, ob diese stimmen, und korrigiere sie gegebenenfalls.",
   "home-first-login-user-label": "Benutzername",
   "home-first-login-email-label": "E-Mail",
   "home-first-login-correct": "Stimmt.",

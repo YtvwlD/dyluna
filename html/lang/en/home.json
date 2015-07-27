@@ -5,10 +5,7 @@
   "home-first-login-error-label": "Error!",
   "home-first-login-error-text": "Sadly, this did not succeed. You can try it again if you want to.",
   "home-first-login-success-text": "Your data has been saved.",
-  "home-first-login-text":
-    "This is your first login.<br /> <br />
-    We have got some data from your OpenID provider.<br />
-    Please check whether they are correct, and please change them if they are wrong.",
+  "home-first-login-text": "This is your first login.<br /> <br />We have got some data from your OpenID provider.<br />Please check whether they are correct, and please change them if they are wrong.",
   "home-first-login-user-label": "User",
   "home-first-login-email-label": "Email",
   "home-first-login-correct": "Right.",
