@@ -134,7 +134,7 @@ $.getScript("js/handlebars.js", function() {
 if (localStorage.getItem("sid") != undefined)
 {
 	var sid = localStorage.getItem("sid");
-	$.get("ajax.py?do=session|check|" + sid, function(data) {
+	$.get("ajax.py?do=session|check|" + sid).always(function(data) {
 		if (data.status == 200) //already logged in
 		{
 			loadpage("home");
