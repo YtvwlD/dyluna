@@ -13,7 +13,7 @@ function spindiv()
 {
 	var spinner = document.createElement("div");
 	spinner.id = "spindiv";
-	spinner.innerHTML = "<div id=\"spinner-div\"><img src=\"img/ajax-loader.gif\" alt=\"Loading...\" /></div><br /><font id=spinner-text>REPLACE_GAME_NAME</font>";
+	spinner.innerHTML = "<div id=\"spinner-div\"><img src=\"img/ajax-loader.gif\" alt=\"Loading...\" /></div>";
 	document.body.appendChild(spinner);
 	//jQuery("spinner-div").spin("large");
 	/*var opts = {
@@ -41,11 +41,6 @@ function spindiv()
 function unspindiv()
 {
 	jQuery("#spindiv").remove();
-}
-
-function spindivtext(text)
-{
-	jQuery("#spinner-text").html(text);
 }
 
 loadcss("spindiv");

@@ -8,7 +8,6 @@ function runPage()
 function check_first_login()
 {
 	spindiv();
-	spindivtext("erste Anmeldung");
 	var req = $.get("ajax.py?do=first_login|check|"+sid);
 	req.error(check_first_login);
 	req.success(function(data) {

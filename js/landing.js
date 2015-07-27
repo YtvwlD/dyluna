@@ -6,7 +6,6 @@ function runPage()
 		$("#oid_url").attr("disabled", false);
 		} );
 	$("#loginOrRegister").bind("shown.bs.modal", function() { $("#oid_url").focus(); });
-	spindivtext("Fertig.");
 }
 
 var oid_win;

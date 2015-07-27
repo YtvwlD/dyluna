@@ -5,7 +5,6 @@ function loadpage(ppage)
 {
 	console.log("Loading page " + ppage + "...");
 	spindiv();
-	//spindivtext(ppage);
 	page = ppage;
 	$(".active").toggleClass("active");
 	$("#" + page).toggleClass("active");

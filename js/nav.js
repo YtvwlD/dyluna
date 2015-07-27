@@ -12,7 +12,6 @@ var empty = " - leer - ";
 function logout()
 {
 	spindiv();
-	spindivtext("Abmelden");
 	var logoutreq = jQuery.get("ajax.py?do=session|destroy|" + sid);
 	logoutreq.always(function(data) {
 		if (data.status == 412)
